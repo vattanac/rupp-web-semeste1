@@ -28,61 +28,37 @@
 
     <script>
         $(document).ready(function () {
-
-            function inputAlphabet(inputtext, alertMsg, elementID) {
-                // name = $('#name').val()
-                var alphaExp = /^[a-zA-Z]+$/;
-                if (inputtext.match(alphaExp)) {
-                    return true;
-                } else {
-                    document.getElementById(elementID).innerText = alertMsg;
-                    inputtext.focus();
-                    return false;
-                }
-            }
-
-
             var id, name, row, gender
-
-            function textNumeric(inputtext, alertMsg, elementID) {
-                var numericExpression = /^[0-9]+$/;
+            function validate(inputtext, alertMsg, elementID,regex) {
                 document.getElementById(elementID).innerText = "";
                 if (inputtext.length > 0) {
-                    if (inputtext.match(numericExpression)) {
-
+                    if (inputtext.match(regex)) {
                         return true;
                     } else {
                         document.getElementById(elementID).innerText = alertMsg;
                         inputtext.focus();
                         return false;
                     }
+                }else {
+                    document.getElementById(elementID).innerText = "please input value!!"
                 }
             }
 
-            function textString(inputtext, alertMsg, elementID) {
-                var alphaExp = /^[a-zA-Z]+$/;
-                document.getElementById(elementID).innerText = "";
-                if (inputtext.length > 0) {
-                    if (inputtext.match(alphaExp)) {
-                        return true;
-                    } else {
-                        document.getElementById(elementID).innerText = alertMsg;
-                        inputtext.focus();
-                        return false;
-                    }
-                }
-            }
+          
 
-            $("#id").focusout(function () {
+            $('#id').on('keyup  focusout ', function(e) {
                 id = $('#id').val()
-                textNumeric(id, "please Input number only ", "p1")
+                validate(id, "please Input number only ", "p1",/^[0-9]+$/)
             });
-            $("#name").focusout(function () {
+
+            $('#name').on('keyup  focusout  ', function(e) {
                 id = $('#name').val()
-                textString(id, "please Input String only ", "p2")
+                validate(id, "please Input String only ", "p2",/^[a-zA-Z]+$/)
             });
+
 
             $("#btnclick").click(function () {
+                if(validate)
                 id = $('#id').val()
                 name = $('#name').val()
 
