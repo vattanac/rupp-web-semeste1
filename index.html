@@ -6,14 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-
     <script src="jquery-3.3.1.min.js"></script>
 </head>
 
 <body>
     <div>
         <form action="">
-
             ID<input type="text" name="" id="id"><label style="color:red" id="p1"></label><br>
             Name<input type="text" name="" id="name"><label style="color:red" id="p2"></label><br>
             <input type="radio" name="gender" id="male">Male
@@ -22,46 +20,47 @@
         </form>
 
         <div id="contain">
-
+             <!-- contain Table -->
         </div>
     </div>
 
     <script>
         $(document).ready(function () {
             var id, name, row, gender
+            var isEmpty = false
             function validate(inputtext, alertMsg, elementID,regex) {
                 document.getElementById(elementID).innerText = "";
                 if (inputtext.length > 0) {
                     if (inputtext.match(regex)) {
-                        return true;
+                        isEmpty = true
                     } else {
                         document.getElementById(elementID).innerText = alertMsg;
                         inputtext.focus();
-                        return false;
+                        isEmpty = false
                     }
                 }else {
                     document.getElementById(elementID).innerText = "please input value!!"
                 }
+                return isEmpty
             }
-
-          
-
+            //    implements validat on input's ID 
             $('#id').on('keyup  focusout ', function(e) {
                 id = $('#id').val()
                 validate(id, "please Input number only ", "p1",/^[0-9]+$/)
             });
-
+            // implements validat on input's Name
             $('#name').on('keyup  focusout  ', function(e) {
                 id = $('#name').val()
                 validate(id, "please Input String only ", "p2",/^[a-zA-Z]+$/)
             });
 
-
+            // add data to table's row
             $("#btnclick").click(function () {
-                if(validate)
+               
                 id = $('#id').val()
                 name = $('#name').val()
 
+                if(isEmpty == true){
                 if ($('#male').is(':checked')) {
                     gender = "male"
                 } else {
@@ -70,10 +69,10 @@
                 alert(gender)
 
                 var table =
-                    `<table border="1">
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Gender</th>`
+                            `<table border="1">
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Gender</th>`
 
                 row += `<tr>
                             <td>` + id +   `</td>
@@ -82,12 +81,13 @@
                          </tr>`
                 table += row + `</table>`
                 $("#contain").html(table)
+                
+                }else {
+                    alert("Can't Input Empty")                   
+                }
             })
         })
     </script>
-
-
-
 </body>
 
 </html>
