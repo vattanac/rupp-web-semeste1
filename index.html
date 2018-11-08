@@ -26,19 +26,40 @@
 
     <script>
         $(document).ready(function () {
+
+
+// $(function(){
+//     alert("hellloeroesrs")
+// })
+
+// jQuery(document).ready(function($){
+//     alert("hdkfjhsajdfhskf")
+// })
+
+// (function($){
+//     $(function(){
+//         alert("hdkfjhsajdfhskf")
+//     })
+// })(jQuery)
+
+// $(window).load(function(){
+//     alert("hdkfjhsajdfhskf")
+// })
+
             var id, name, row, gender
             var isEmpty = false
             function validate(inputtext, alertMsg, elementID,regex) {
                 document.getElementById(elementID).innerText = "";
                 if (inputtext.length > 0) {
                     if (inputtext.match(regex)) {
-                        isEmpty = true
+                        //isEmpty = true
                     } else {
                         document.getElementById(elementID).innerText = alertMsg;
                         inputtext.focus();
-                        isEmpty = false
+                        //isEmpty = false
                     }
                 }else {
+                    isEmpty = false
                     document.getElementById(elementID).innerText = "please input value!!"
                 }
                 return isEmpty
@@ -47,6 +68,7 @@
             $('#id').on('keyup  focusout ', function(e) {
                 id = $('#id').val()
                 validate(id, "please Input number only ", "p1",/^[0-9]+$/)
+
             });
             // implements validat on input's Name
             $('#name').on('keyup  focusout  ', function(e) {
@@ -60,7 +82,7 @@
                 id = $('#id').val()
                 name = $('#name').val()
 
-                if(isEmpty == true){
+                if(name != "" && id != ""){
                 if ($('#male').is(':checked')) {
                     gender = "male"
                 } else {
@@ -83,7 +105,7 @@
                 $("#contain").html(table)
                 
                 }else {
-                    alert("Can't Input Empty")                   
+                    alert("Can't add data please  Input data")                   
                 }
             })
         })
